@@ -49,7 +49,7 @@ public class ForgeTeam extends FinalIDObject implements INBTSerializable<NBTTagC
 	public static final int MAX_TEAM_ID_LENGTH = 35;
 	public static final Pattern TEAM_ID_PATTERN = Pattern.compile("^[a-z0-9_]{1," + MAX_TEAM_ID_LENGTH + "}$");
 
-	private final short uid;
+	private final int uid;
 	public final Universe universe;
 	public final TeamType type;
 	public ForgePlayer owner;
@@ -67,7 +67,7 @@ public class ForgeTeam extends FinalIDObject implements INBTSerializable<NBTTagC
 	private Icon cachedIcon;
 	public boolean needsSaving;
 
-	public ForgeTeam(Universe u, short id, String n, TeamType t)
+	public ForgeTeam(Universe u, int id, String n, TeamType t)
 	{
 		super(n, t.isNone ? 0 : (StringUtils.FLAG_ID_DEFAULTS | StringUtils.FLAG_ID_ALLOW_EMPTY));
 		uid = id;
@@ -88,7 +88,7 @@ public class ForgeTeam extends FinalIDObject implements INBTSerializable<NBTTagC
 		needsSaving = false;
 	}
 
-	public final short getUID()
+	public final int getUID()
 	{
 		return uid;
 	}
@@ -105,7 +105,7 @@ public class ForgeTeam extends FinalIDObject implements INBTSerializable<NBTTagC
 
 	public final String getUIDCode()
 	{
-		return String.format("%04X", uid);
+		return String.format("%08X", uid);
 	}
 
 	@Override

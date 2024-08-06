@@ -37,14 +37,15 @@ import java.util.Map;
 		modid = FTBLib.MOD_ID,
 		name = FTBLib.MOD_NAME,
 		version = FTBLib.VERSION,
-		acceptableRemoteVersions = "*",
+//		Uid type is changed, old version is no longer supported.
+//		acceptableRemoteVersions = "*",
 		dependencies = "required-after:forge@[0.0.0.forge,);after:jei@[4.6.0,);"
 )
 public class FTBLib
 {
 	public static final String MOD_ID = "ftblib";
 	public static final String MOD_NAME = "FTB Library";
-	public static final String VERSION = "0.0.0.ftblib";
+	public static final String VERSION = Tags.VERSION;
 	public static final String THIS_DEP = "required-after:" + MOD_ID + "@[" + VERSION + ",)";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 	public static final String KEY_CATEGORY = "key.categories.ftbmods";
@@ -84,6 +85,7 @@ public class FTBLib
 	@Mod.EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
+		event.getModMetadata().version = VERSION;
 		Locale.setDefault(Locale.US);
 		FTBLibConfig.sync();
 		PROXY.preInit(event);

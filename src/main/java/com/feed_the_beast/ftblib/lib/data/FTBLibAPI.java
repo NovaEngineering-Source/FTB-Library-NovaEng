@@ -200,7 +200,7 @@ public class FTBLibAPI
 		return p == null ? "" : p.team.getId();
 	}
 
-	public static short getTeamID(UUID player)
+	public static int getTeamID(UUID player)
 	{
 		if (!Universe.loaded())
 		{

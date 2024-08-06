@@ -103,7 +103,7 @@ public class ConfigTeam extends ConfigValue
 	@Override
 	public void writeToNBT(NBTTagCompound nbt, String key)
 	{
-		nbt.setShort(key, (short) getInt());
+		nbt.setInteger(key, getInt());
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class ConfigTeam extends ConfigValue
 		}
 		else if (id instanceof NBTPrimitive)
 		{
-			set.accept(get.get().universe.getTeam(((NBTPrimitive) id).getShort()));
+			set.accept(get.get().universe.getTeam(((NBTPrimitive) id).getInt()));
 		}
 	}
 
@@ -130,7 +130,7 @@ public class ConfigTeam extends ConfigValue
 
 		for (ForgeTeam t : teams)
 		{
-			data.writeShort(t.getUID());
+			data.writeInt(t.getUID());
 			data.writeString(t.getId());
 			data.writeTextComponent(t.getTitle());
 			data.writeIcon(t.getIcon());

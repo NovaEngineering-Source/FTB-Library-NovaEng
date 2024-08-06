@@ -28,7 +28,8 @@ import com.feed_the_beast.ftblib.lib.util.misc.TimeType;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
-import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -268,7 +269,7 @@ public class Universe
 	public WorldServer world;
 	public final Map<UUID, ForgePlayer> players;
 	private final Map<String, ForgeTeam> teams;
-	private final Short2ObjectOpenHashMap<ForgeTeam> teamMap;
+	private final Int2ObjectMap<ForgeTeam> teamMap;
 	private final ForgeTeam noneTeam;
 	private UUID uuid;
 	private boolean needsSaving;
@@ -288,8 +289,8 @@ public class Universe
 		ticks = Ticks.NO_TICKS;
 		players = new HashMap<>();
 		teams = new HashMap<>();
-		teamMap = new Short2ObjectOpenHashMap<>();
-		noneTeam = new ForgeTeam(this, (short) 0, "", TeamType.NONE);
+		teamMap = new Int2ObjectOpenHashMap<>();
+		noneTeam = new ForgeTeam(this, 0, "", TeamType.NONE);
 		uuid = null;
 		needsSaving = false;
 		checkSaving = true;
@@ -436,7 +437,7 @@ public class Universe
 							}
 
 							teamNBT.put(s, nbt);
-							short uid = nbt.getShort("UID");
+							int uid = nbt.getInteger("UID");
 							ForgeTeam team = new ForgeTeam(this, generateTeamUID(uid), s, TeamType.NAME_MAP.get(nbt.getString("Type")));
 							addTeam(team);
 
@@ -454,7 +455,7 @@ public class Universe
 			ex.printStackTrace();
 		}
 
-		fakePlayerTeam = new ForgeTeam(this, (short) 1, "fakeplayer", TeamType.SERVER_NO_SAVE)
+		fakePlayerTeam = new ForgeTeam(this, 1, "fakeplayer", TeamType.SERVER_NO_SAVE)
 		{
 			@Override
 			public void markDirty()
@@ -590,7 +591,7 @@ public class Universe
 				{
 					NBTTagCompound nbt = team.serializeNBT();
 					nbt.setString("ID", team.getId());
-					nbt.setShort("UID", team.getUID());
+					nbt.setInteger("UID", team.getUID());
 					nbt.setString("Type", team.type.getName());
 					NBTUtils.writeNBTSafe(file, nbt);
 					new ForgeTeamSavedEvent(team).post();
@@ -768,21 +769,21 @@ public class Universe
 		{
 			return noneTeam;
 		}
-		else if (id.length() == 4)
-		{
-			try
-			{
-				ForgeTeam team = getTeam(Integer.valueOf(id, 16).shortValue());
-
-				if (team.isValid())
-				{
-					return team;
-				}
-			}
-			catch (Exception ex)
-			{
-			}
-		}
+//		else if (id.length() == 4)
+//		{
+//			try
+//			{
+//				ForgeTeam team = getTeam(Integer.valueOf(id, 16));
+//
+//				if (team.isValid())
+//				{
+//					return team;
+//				}
+//			}
+//			catch (Exception ex)
+//			{
+//			}
+//		}
 
 		if (id.equals("fakeplayer"))
 		{
@@ -806,7 +807,7 @@ public class Universe
 		return noneTeam;
 	}
 
-	public ForgeTeam getTeam(short uid)
+	public ForgeTeam getTeam(int uid)
 	{
 		if (uid == 0)
 		{
@@ -866,11 +867,11 @@ public class Universe
 		clearCache();
 	}
 
-	public short generateTeamUID(short id)
+	public int generateTeamUID(int id)
 	{
 		while (id == 0 || id == 1 || id == 2 || teamMap.containsKey(id))
 		{
-			id = (short) MathUtils.RAND.nextInt();
+			id = MathUtils.RAND.nextInt();
 		}
 
 		return id;

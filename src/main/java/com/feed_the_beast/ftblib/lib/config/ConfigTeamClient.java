@@ -27,11 +27,11 @@ public class ConfigTeamClient extends ConfigString
 {
 	public static class TeamInst extends FinalIDObject
 	{
-		public final short uid;
+		public final int uid;
 		public ITextComponent title;
 		public Icon icon;
 
-		public TeamInst(short u, String id)
+		public TeamInst(int u, String id)
 		{
 			super(id);
 			uid = u;
@@ -125,7 +125,7 @@ public class ConfigTeamClient extends ConfigString
 		else if (id instanceof NBTPrimitive)
 		{
 			ForgeTeam team = null;
-			short ids = ((NBTPrimitive) id).getShort();
+			int ids = ((NBTPrimitive) id).getInt();
 
 			for (TeamInst inst : map.values())
 			{
@@ -152,7 +152,7 @@ public class ConfigTeamClient extends ConfigString
 
 		for (int i = 0; i < s; i++)
 		{
-			short uid = data.readShort();
+			int uid = data.readInt();
 			String id = data.readString();
 			TeamInst inst = new TeamInst(uid, id);
 			inst.title = data.readTextComponent();

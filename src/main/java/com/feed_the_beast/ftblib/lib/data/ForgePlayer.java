@@ -281,7 +281,7 @@ public class ForgePlayer implements INBTSerializable<NBTTagCompound>, Comparable
 
 				if (!team.isValid())
 				{
-					team = new ForgeTeam(universe, (short) 2, "singleplayer", TeamType.SERVER);
+					team = new ForgeTeam(universe, 2, "singleplayer", TeamType.SERVER);
 					team.setFreeToJoin(true);
 					universe.addTeam(team);
 					team.setTitle(getName());
@@ -304,7 +304,7 @@ public class ForgePlayer implements INBTSerializable<NBTTagCompound>, Comparable
 
 				if (!universe.getTeam(id).isValid())
 				{
-					team = new ForgeTeam(universe, universe.generateTeamUID((short) 0), id, TeamType.PLAYER);
+					team = new ForgeTeam(universe, universe.generateTeamUID(0), id, TeamType.PLAYER);
 					team.owner = this;
 					universe.addTeam(team);
 					team.setColor(EnumTeamColor.NAME_MAP.getRandom(universe.world.rand));

@@ -79,7 +79,7 @@ public class CmdCreate extends CmdBase
 
 		p.team.universe.clearCache();
 
-		ForgeTeam team = new ForgeTeam(p.team.universe, p.team.universe.generateTeamUID((short) 0), args[0], TeamType.PLAYER);
+		ForgeTeam team = new ForgeTeam(p.team.universe, p.team.universe.generateTeamUID((int) 0), args[0], TeamType.PLAYER);
 
 		if (args.length > 1)
 		{
