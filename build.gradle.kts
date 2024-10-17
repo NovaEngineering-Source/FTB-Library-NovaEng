@@ -12,7 +12,7 @@ plugins {
 
 // Project properties
 group = "com.feed_the_beast.ftblib"
-version = "5.5.1"
+version = "5.5.3"
 
 // Set the toolchain version to decouple the Java we run Gradle with from the Java used to compile and run the mod
 java {

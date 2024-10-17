@@ -38,7 +38,7 @@ import java.util.Map;
 		name = FTBLib.MOD_NAME,
 		version = FTBLib.VERSION,
 //		Uid type is changed, old version is no longer supported.
-//		acceptableRemoteVersions = "*",
+		acceptableRemoteVersions = "[5.5.0,)",
 		dependencies = "required-after:forge@[0.0.0.forge,);after:jei@[4.6.0,);"
 )
 public class FTBLib

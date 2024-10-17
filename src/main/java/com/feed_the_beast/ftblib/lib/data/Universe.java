@@ -696,13 +696,13 @@ public class Universe
 			}
 		}
 
-		for (ForgePlayer p : players.values())
-		{
-			if (p.getName().toLowerCase().contains(s))
-			{
-				return p;
-			}
-		}
+//		for (ForgePlayer p : players.values())
+//		{
+//			if (p.getName().toLowerCase().contains(s))
+//			{
+//				return p;
+//			}
+//		}
 
 		return null;
 	}
